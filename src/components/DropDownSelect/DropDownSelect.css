@@ -1,0 +1,10 @@
+.drop {
+  padding: 0 20px;
+  display: flex;
+}
+
+option {
+  cursor: pointer;
+  background-color: #e4e3e3;
+  width: 100%;
+}
