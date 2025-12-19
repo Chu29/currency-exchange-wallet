@@ -18,3 +18,17 @@ body {
   flex-direction: column;
   gap: 20px;
 }
+
+.wallets {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (min-width: 769px) {
+  .wallets {
+    flex-direction: row;
+  }
+}
