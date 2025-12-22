@@ -1,4 +1,6 @@
+import CurrentExchangeRates from "./components/CurrentExchangeRates/CurrentExchangeRates";
 import Header from "./components/Header/Header";
+import TransactionTab from "./components/Transactions/TransactionTab";
 import WalletCard from "./components/Wallet/WalletCard";
 import WalletBalanceCard from "./components/WalletBallance/WalletBalanceCard";
 
@@ -14,6 +16,8 @@ function App() {
         <WalletCard currency="EUR" amt="€500.00" />
         <WalletCard currency="XAF" amt="XAF 10000.00" />
       </section>
+      <TransactionTab />
+      <CurrentExchangeRates />
     </div>
   );
 }
