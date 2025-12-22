@@ -4,11 +4,11 @@ const DropDownSelect = () => {
   const CURRENCIES = ["USD", "EUR", "XAF"];
 
   return (
-    <div className="drop">
+    <select className="drop">
       {CURRENCIES.map((currency, index) => (
         <option key={index}>{currency}</option>
       ))}
-    </div>
+    </select>
   );
 };
 
