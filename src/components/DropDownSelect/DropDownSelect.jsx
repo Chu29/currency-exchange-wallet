@@ -6,7 +6,9 @@ const DropDownSelect = () => {
   return (
     <select className="drop">
       {CURRENCIES.map((currency, index) => (
-        <option key={index}>{currency}</option>
+        <option key={index} value={CURRENCIES[index]}>
+          {currency}
+        </option>
       ))}
     </select>
   );
