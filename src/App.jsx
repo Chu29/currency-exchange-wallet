@@ -6,14 +6,14 @@ import WalletCard from "./components/Wallet/WalletCard";
 import WalletBalanceCard from "./components/WalletBallance/WalletBalanceCard";
 
 import "./index.css";
-import { WalletProvider } from "./context/WalletContext";
+import { WalletContextProvider } from "./context/WalletContextProvider";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <WalletProvider>
+      <WalletContextProvider>
         <div className="app-container">
           <Header />
           <WalletBalanceCard />
@@ -25,7 +25,7 @@ function App() {
           <TransactionTab />
           <CurrentExchangeRates />
         </div>
-      </WalletProvider>
+      </WalletContextProvider>
     </QueryClientProvider>
   );
 }
