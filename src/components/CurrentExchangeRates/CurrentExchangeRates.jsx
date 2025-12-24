@@ -1,5 +1,7 @@
 import "./CurrentExchangeRates.css";
 import { useExchange } from "../../hooks/useExchange";
+import { TfiExchangeVertical } from "react-icons/tfi";
+import { TbExchange } from "react-icons/tb";
 
 const CurrentExchangeRates = () => {
   const { rates, isPending, isError } = useExchange();
@@ -23,16 +25,31 @@ const CurrentExchangeRates = () => {
       <h3>Current Exchange Rates</h3>
       <div className="container">
         <div className="rates">
-          <p>1 USD = {usdToEUR.toFixed(2)} EUR</p>{" "}
-          <p>1 EUR = {eurToXAF.toFixed(2)} XAF</p>
+          <p>
+            <strong>1</strong> USD = <strong>{usdToEUR.toFixed(2)}</strong> EUR
+          </p>{" "}
+          <TbExchange />
+          <p>
+            <strong>1</strong> EUR = <strong>{eurToXAF.toFixed(2)}</strong> XAF
+          </p>
         </div>
         <div className="rates">
-          <p>1 USD = {usdToXAF.toFixed(2)} XAF</p>{" "}
-          <p>1 XAF = {xafToUSD.toFixed(4)} USD</p>
+          <p>
+            <strong>1</strong> USD = <strong>{usdToXAF.toFixed(2)}</strong> XAF
+          </p>{" "}
+          <TbExchange />
+          <p>
+            <strong>1</strong> XAF = <strong>{xafToUSD.toFixed(4)}</strong> USD
+          </p>
         </div>
         <div className="rates">
-          <p>1 EUR = {eurToUSD.toFixed(2)} USD</p>{" "}
-          <p>1 XAF = {xafToEUR.toFixed(4)} EUR</p>
+          <p>
+            <strong>1</strong> EUR = <strong>{eurToUSD.toFixed(2)}</strong> USD
+          </p>{" "}
+          <TbExchange />
+          <p>
+            <strong>1</strong> XAF = <strong>{xafToEUR.toFixed(4)}</strong> EUR
+          </p>
         </div>
       </div>
     </div>
