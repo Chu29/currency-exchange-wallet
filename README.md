@@ -1,16 +1,69 @@
-# React + Vite
+# Xchange | A currency exchange wallet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## App
 
-Currently, two official plugins are available:
+![HomePage](./public/image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About This Project
 
-## React Compiler
+This project is a React-based Currency Exchange Wallet designed to demonstrate effective state management and data manipulation within a React application.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The wallet allows users to manage balances across three currencies: USD, EUR, and XAF. Users can deposit funds into any currency, exchange amounts between currencies using predefined exchange rates, and select a default currency for viewing their total wallet value.
 
-## Expanding the ESLint configuration
+The application dynamically calculates the totalized value of all currency balances and displays it in the user’s selected default currency. All currency conversions are handled in real-time based on fixed exchange rates.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project focuses on:
+
+- React state management
+- Component-driven architecture
+- Currency conversion logic
+- User-driven data updates
+- Clean and readable UI interactions
+
+It serves as a practical example of handling complex state updates and transformations in a ReactJS application.
+
+## Built With
+
+- ReactJS
+- npm
+- vercel
+- Ky
+
+### Prerequisites
+
+Knowledge about JS, ReactJS, Ky, npm, vite, Zustand and tailwindcss
+
+- Basic data structures
+- Arrays
+- useEffect
+- Functions
+- objects
+
+## Clone Project
+
+- To get a local copy up and running follow these simple example steps.
+- Clone this repository with `git@github.com:Chu29/currency-exchange-wallet.git` using your terminal or command line.
+- Change to the project directory by entering: `cd currency-exchange-wallet` in the terminal.
+
+## Command line steps
+
+- $ git clone `git@github.com:Chu29/currency-exchange-wallet.git`
+- $ `cd currency-exchange-wallet`
+- $ `git checkout development`
+
+## Start App
+
+- run `npm install`
+- run `npm run dev` in your command line
+
+## Live Site
+
+[Xchange | A currency exchange wallet ](https://currency-exchange-wallet.vercel.app/)
+
+## Author
+
+**Chu Abuemkeze M.K**
+
+- GitHub: [@Chu29](https://github.com/Chu29)
+- Twitter: [@chu_codes](https://x.com/chu_codes)
+- LinkedIn: [Chu Abuemkeze M.K](https://www.linkedin.com/in/chu-abuemkeze/)
