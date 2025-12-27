@@ -1,10 +1,10 @@
 import "./DropDownSelect.css";
 
-const DropDownSelect = () => {
+const DropDownSelect = ({ value, onChange }) => {
   const CURRENCIES = ["USD", "EUR", "XAF"];
 
   return (
-    <select className="drop">
+    <select value={value} onChange={onChange} className="drop">
       {CURRENCIES.map((currency, index) => (
         <option key={index} value={CURRENCIES[index]}>
           {currency}
