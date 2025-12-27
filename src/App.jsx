@@ -10,16 +10,15 @@ import { useExchange } from "./hooks/useExchange";
 
 function App() {
   const { balance } = useExchange();
-  const { xaf, usd, eur } = balance;
-  console.log(xaf);
+  const { XAF, USD, EUR } = balance;
   return (
     <div className="app-container">
       <Header />
       <WalletBalanceCard />
       <section className="wallets">
-        <WalletCard currency="USD" amt={"$ " + usd.toFixed(2)} />
-        <WalletCard currency="EUR" amt={"€ " + eur.toFixed(2)} />
-        <WalletCard currency="XAF" amt={"XAF " + xaf.toFixed(2)} />
+        <WalletCard currency="USD" amt={"$ " + USD.toFixed(2)} />
+        <WalletCard currency="EUR" amt={"€ " + EUR.toFixed(2)} />
+        <WalletCard currency="XAF" amt={"XAF " + XAF.toFixed(2)} />
       </section>
       <TransactionTab />
       <CurrentExchangeRates />
