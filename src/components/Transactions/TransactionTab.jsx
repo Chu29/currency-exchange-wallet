@@ -17,34 +17,34 @@ const TransactionTab = () => {
   const { balance, setBalance, convert } = useExchange();
 
   // Exchange form state
-  const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("XAF");
-  const [fromAmt, setFromAmt] = useState("");
+  const [baseCurrency, setBaseCurrency] = useState("USD");
+  const [targetCurrency, setTargetCurrency] = useState("XAF");
+  const [baseAmt, setBaseAmt] = useState("");
 
   // Deposit form state
   const [depositCurrency, setDepositCurrency] = useState("USD");
   const [depositAmt, setDepositAmt] = useState("");
 
   // Calculate converted amount
-  const toAmt = convert(fromCurrency, toCurrency, Number(fromAmt) || 0);
+  const targetAmt = convert(baseCurrency, targetCurrency, Number(baseAmt) || 0);
 
   const handleExchange = (e) => {
     e.preventDefault();
 
-    const amount = Number(fromAmt); // convert the value received from input field to a number
+    const amount = Number(baseAmt); // convert the value received from input field to a number
     if (!amount || amount <= 0) return;
-    if (balance[fromCurrency] < amount) {
+    if (balance[baseCurrency] < amount) {
       alert("Insufficient balance!");
       return;
     }
 
     setBalance((prev) => ({
       ...prev,
-      [fromCurrency]: prev[fromCurrency] - amount,
-      [toCurrency]: prev[toCurrency] + toAmt,
+      [baseCurrency]: prev[baseCurrency] - amount,
+      [targetCurrency]: prev[targetCurrency] + targetAmt,
     }));
 
-    setFromAmt("");
+    setBaseAmt("");
   };
 
   const handleDeposit = (e) => {
@@ -84,14 +84,15 @@ const TransactionTab = () => {
                 <label>From</label>
                 <div className="input-ctn">
                   <DropDownSelect
-                    value={fromCurrency}
-                    onChange={(e) => setFromCurrency(e.target.value)}
+                    value={baseCurrency}
+                    onChange={(e) => setBaseCurrency(e.target.value)}
                   />
                   <Input
                     type="number"
                     min="0"
-                    value={fromAmt}
-                    onChange={(e) => setFromAmt(e.target.value)}
+                    step="0.01"
+                    value={baseAmt}
+                    onChange={(e) => setBaseAmt(e.target.value)}
                     className="input"
                     placeholder="0.00"
                   />
@@ -106,12 +107,12 @@ const TransactionTab = () => {
                 <label>To</label>
                 <div className="input-ctn">
                   <DropDownSelect
-                    value={toCurrency}
-                    onChange={(e) => setToCurrency(e.target.value)}
+                    value={targetCurrency}
+                    onChange={(e) => setTargetCurrency(e.target.value)}
                   />
                   <Input
                     type="number"
-                    value={toAmt.toFixed(2)}
+                    value={targetAmt.toFixed(2)}
                     readOnly
                     className="input"
                     placeholder="0.00"
