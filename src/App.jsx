@@ -6,27 +6,24 @@ import WalletCard from "./components/Wallet/WalletCard";
 import WalletBalanceCard from "./components/WalletBallance/WalletBalanceCard";
 
 import "./index.css";
-import { WalletContextProvider } from "./context/WalletContextProvider";
-
-const queryClient = new QueryClient();
+import { useExchange } from "./hooks/useExchange";
 
 function App() {
+  const { balance } = useExchange();
+  const { xaf, usd, eur } = balance;
+  console.log(xaf);
   return (
-    <QueryClientProvider client={queryClient}>
-      <WalletContextProvider>
-        <div className="app-container">
-          <Header />
-          <WalletBalanceCard />
-          <section className="wallets">
-            <WalletCard currency="USD" amt="$100.00" />
-            <WalletCard currency="EUR" amt="€500.00" />
-            <WalletCard currency="XAF" amt="XAF 10000.00" />
-          </section>
-          <TransactionTab />
-          <CurrentExchangeRates />
-        </div>
-      </WalletContextProvider>
-    </QueryClientProvider>
+    <div className="app-container">
+      <Header />
+      <WalletBalanceCard />
+      <section className="wallets">
+        <WalletCard currency="USD" amt={"$ " + usd.toFixed(2)} />
+        <WalletCard currency="EUR" amt={"€ " + eur.toFixed(2)} />
+        <WalletCard currency="XAF" amt={"XAF " + xaf.toFixed(2)} />
+      </section>
+      <TransactionTab />
+      <CurrentExchangeRates />
+    </div>
   );
 }
 
