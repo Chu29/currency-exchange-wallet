@@ -9,7 +9,7 @@ const Header = () => {
       </h1>
       <div className="profile">
         <FaUserCircle className="profile-icon" />
-        <span className="user-name">username</span>
+        <span className="user-name">chu</span>
       </div>
     </div>
   );
