@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getRates } from "../services/rates.service";
 import { WalletContext } from "./WalletContext";
-import { useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const WalletContextProvider = ({ children }) => {
   const { data, isPending, isError } = useQuery({
@@ -10,7 +10,7 @@ export const WalletContextProvider = ({ children }) => {
   });
 
   // initial wallet balance state
-  const [balance, setBalance] = useState({
+  const [balance, setBalance] = useLocalStorage("wallet", {
     EUR: 500.0,
     USD: 100.0,
     XAF: 10000.0,
