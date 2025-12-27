@@ -11,9 +11,9 @@ export const WalletContextProvider = ({ children }) => {
 
   // initial wallet balance state
   const [balance, setBalance] = useState({
-    eur: 500.0,
-    usd: 100.0,
-    xaf: 10000.0,
+    EUR: 500.0,
+    USD: 100.0,
+    XAF: 10000.0,
   });
 
   const convert = (from, to, amt) => {
