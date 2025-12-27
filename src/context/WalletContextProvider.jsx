@@ -16,6 +16,18 @@ export const WalletContextProvider = ({ children }) => {
     xaf: 10000.0,
   });
 
+  const convert = (from, to, amt) => {
+    const rates = data?.rates;
+    if (!rates || isPending) return 0;
+    //convert from xaf or eur to usd
+    const amtInUSD = from === "USD" ? amt : amt / rates[from];
+
+    // convert from usd to another currency
+    const result = to === "USD" ? amtInUSD : amtInUSD * rates[to];
+
+    return result;
+  };
+
   // make the state available to the entire app, by passing it down as props
   const value = {
     rates: data?.rates || {},
@@ -23,6 +35,7 @@ export const WalletContextProvider = ({ children }) => {
     isError,
     balance,
     setBalance,
+    convert,
   };
 
   return (
