@@ -7,10 +7,9 @@ import {
   TabPanels,
   Tabs,
 } from "react-aria-components";
-import "./TransactionTab.css";
-import DropDownSelect from "../DropDownSelect/DropDownSelect";
+import DropDownSelect from "./DropDownSelect";
 import { FaExchangeAlt } from "react-icons/fa";
-import { useExchange } from "../../hooks/useExchange";
+import { useExchange } from "../hooks/useExchange";
 import { useState } from "react";
 
 const TransactionTab = () => {

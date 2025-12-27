@@ -1,4 +1,3 @@
-import "./DropDownSelect.css";
 
 const DropDownSelect = ({ value, onChange }) => {
   const CURRENCIES = ["USD", "EUR", "XAF"];

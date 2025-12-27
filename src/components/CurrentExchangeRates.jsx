@@ -1,6 +1,5 @@
-import "./CurrentExchangeRates.css";
-import { useExchange } from "../../hooks/useExchange";
-import { TfiExchangeVertical } from "react-icons/tfi";
+import "./styles/index.css";
+import { useExchange } from "../hooks/useExchange";
 import { TbExchange } from "react-icons/tb";
 
 const CurrentExchangeRates = () => {

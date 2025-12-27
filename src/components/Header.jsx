@@ -1,6 +1,4 @@
-import React from "react";
-import "./Header.css";
-import { CgProfile } from "react-icons/cg";
+import "../index.css";
 import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
