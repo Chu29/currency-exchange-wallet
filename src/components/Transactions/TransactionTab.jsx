@@ -10,8 +10,57 @@ import {
 import "./TransactionTab.css";
 import DropDownSelect from "../DropDownSelect/DropDownSelect";
 import { FaExchangeAlt } from "react-icons/fa";
+import { useExchange } from "../../hooks/useExchange";
+import { useState } from "react";
 
 const TransactionTab = () => {
+  const { balance, setBalance, convert } = useExchange();
+
+  // Exchange form state
+  const [fromCurrency, setFromCurrency] = useState("USD");
+  const [toCurrency, setToCurrency] = useState("XAF");
+  const [fromAmt, setFromAmt] = useState("");
+
+  // Deposit form state
+  const [depositCurrency, setDepositCurrency] = useState("USD");
+  const [depositAmt, setDepositAmt] = useState("");
+
+  // Calculate converted amount
+  const toAmt = convert(fromCurrency, toCurrency, Number(fromAmt) || 0);
+
+  const handleExchange = (e) => {
+    e.preventDefault();
+
+    const amount = Number(fromAmt); // convert the value received from input field to a number
+    if (!amount || amount <= 0) return;
+    if (balance[fromCurrency] < amount) {
+      alert("Insufficient balance!");
+      return;
+    }
+
+    setBalance((prev) => ({
+      ...prev,
+      [fromCurrency]: prev[fromCurrency] - amount,
+      [toCurrency]: prev[toCurrency] + toAmt,
+    }));
+
+    setFromAmt("");
+  };
+
+  const handleDeposit = (e) => {
+    e.preventDefault();
+
+    const amount = Number(depositAmt);
+    if (!amount || amount <= 0) return;
+
+    setBalance((prev) => ({
+      ...prev,
+      [depositCurrency]: prev[depositCurrency] + amount,
+    }));
+
+    setDepositAmt("");
+  };
+
   return (
     <Tabs className="transaction-section">
       <TabList className="select-transaction">
@@ -22,67 +71,94 @@ const TransactionTab = () => {
           Deposit
         </Tab>
       </TabList>
+
       <TabPanels>
         <TabPanel id="exchange">
-          <Form>
+          <Form onSubmit={handleExchange}>
             <h3 className="exchange-form-title">
-              Exchange Currency <span>Convert between your currencies</span>{" "}
+              Exchange Currency <span>Convert between your currencies</span>
             </h3>
+
             <div className="main-ctn">
               <div className="ctn">
-                From
+                <label>From</label>
                 <div className="input-ctn">
-                  <DropDownSelect />
+                  <DropDownSelect
+                    value={fromCurrency}
+                    onChange={(e) => setFromCurrency(e.target.value)}
+                  />
                   <Input
-                    className="input"
-                    defaultValue="0.00"
                     type="number"
-                    min={0}
+                    min="0"
+                    value={fromAmt}
+                    onChange={(e) => setFromAmt(e.target.value)}
+                    className="input"
+                    placeholder="0.00"
                   />
                 </div>
               </div>
+
               <div className="swap-ico">
                 <FaExchangeAlt />
               </div>
+
               <div className="ctn">
-                To
+                <label>To</label>
                 <div className="input-ctn">
-                  <DropDownSelect />
+                  <DropDownSelect
+                    value={toCurrency}
+                    onChange={(e) => setToCurrency(e.target.value)}
+                  />
                   <Input
-                    className="input"
-                    defaultValue="0.00"
                     type="number"
-                    min={0}
+                    value={toAmt.toFixed(2)}
+                    readOnly
+                    className="input"
+                    placeholder="0.00"
                   />
                 </div>
               </div>
             </div>
-            <button>Exchange</button>
+
+            <button type="submit">Exchange</button>
           </Form>
         </TabPanel>
+
         <TabPanel id="deposit">
-          <Form>
+          <Form onSubmit={handleDeposit}>
             <h3 className="exchange-form-title">
-              Deposit Funds <span>Add money to your wallet</span>{" "}
+              Deposit Funds <span>Add money to your wallet</span>
             </h3>
+
             <div className="dept">
               <label htmlFor="currency">Currency</label>
-              <select className="drop" name="currency" id="currency">
-                <option value="USD">USD-US Dollar</option>
-                <option value="EUR">EUR-Euro</option>
-                <option value="XAF">XAF-Central African CFA Franc</option>
+              <select
+                id="currency"
+                value={depositCurrency}
+                onChange={(e) => setDepositCurrency(e.target.value)}
+                className="drop"
+              >
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="XAF">XAF - Central African CFA Franc</option>
               </select>
             </div>
+
             <div className="dept">
               <label htmlFor="_deposit">Amount</label>
               <Input
-                className="input"
-                name="deposit"
+                type="number"
+                step="0.01"
+                min="0"
                 id="_deposit"
-                defaultValue="0.00"
+                className="input"
+                value={depositAmt}
+                onChange={(e) => setDepositAmt(e.target.value)}
+                placeholder="0.00"
               />
             </div>
-            <button>Deposit</button>
+
+            <button type="submit">Deposit</button>
           </Form>
         </TabPanel>
       </TabPanels>
