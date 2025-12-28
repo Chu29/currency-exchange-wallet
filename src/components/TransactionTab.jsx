@@ -24,6 +24,10 @@ const TransactionTab = () => {
   const [depositCurrency, setDepositCurrency] = useState("USD");
   const [depositAmt, setDepositAmt] = useState("");
 
+  // Withdraw form state
+  const [WithdrawCurrency, setWithdrawCurrency] = useState("USD");
+  const [WithdrawAmt, setWithdrawAmt] = useState("");
+
   // Calculate converted amount
   const targetAmt = convert(baseCurrency, targetCurrency, Number(baseAmt) || 0);
 
@@ -60,6 +64,24 @@ const TransactionTab = () => {
     setDepositAmt("");
   };
 
+  const handleWithdrawal = (e) => {
+    e.preventDefault();
+
+    const amount = Number(WithdrawAmt);
+    if (!amount || amount <= 0) return;
+    if (balance[WithdrawCurrency] < amount) {
+      alert("Insufficient balance!");
+      return;
+    }
+
+    setBalance((prev) => ({
+      ...prev,
+      [WithdrawCurrency]: prev[WithdrawCurrency] - amount,
+    }));
+
+    setWithdrawAmt("");
+  };
+
   return (
     <Tabs className="transaction-section">
       <TabList className="select-transaction">
@@ -68,6 +90,9 @@ const TransactionTab = () => {
         </Tab>
         <Tab id="deposit" className="transaction-title">
           Deposit
+        </Tab>
+        <Tab id="withdraw" className="transaction-title">
+          Withdraw
         </Tab>
       </TabList>
 
@@ -159,6 +184,43 @@ const TransactionTab = () => {
             </div>
 
             <button type="submit">Deposit</button>
+          </Form>
+        </TabPanel>
+        <TabPanel id="withdraw">
+          <Form onSubmit={handleWithdrawal}>
+            <h3 className="exchange-form-title">
+              Withdraw Funds <span>Withdraw money from your wallet</span>
+            </h3>
+
+            <div className="dept">
+              <label htmlFor="currency">Currency</label>
+              <select
+                id="currency"
+                value={WithdrawCurrency}
+                onChange={(e) => setWithdrawCurrency(e.target.value)}
+                className="drop"
+              >
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="XAF">XAF - Central African CFA Franc</option>
+              </select>
+            </div>
+
+            <div className="dept">
+              <label htmlFor="_deposit">Amount</label>
+              <Input
+                type="number"
+                step="0.01"
+                min="0"
+                id="_deposit"
+                className="input"
+                value={WithdrawAmt}
+                onChange={(e) => setWithdrawAmt(e.target.value)}
+                placeholder="0.00"
+              />
+            </div>
+
+            <button type="submit">Withdraw</button>
           </Form>
         </TabPanel>
       </TabPanels>
