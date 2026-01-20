@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import CurrentExchangeRates from "./components/CurrentExchangeRates";
+import Header from "./components/Header";
+import TransactionTab from "./components/TransactionTab";
+import WalletCard from "./components/WalletCard";
+import WalletBalanceCard from "./components/WalletBalanceCard";
+
+import "./index.css";
+import { useExchange } from "./hooks/useExchange";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { balance } = useExchange();
+  const { XAF, USD, EUR } = balance;
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <Header />
+      <WalletBalanceCard />
+      <section className="wallets">
+        <WalletCard currency="USD" amt={"$ " + USD.toLocaleString()} />
+        <WalletCard currency="EUR" amt={"€ " + EUR.toLocaleString()} />
+        <WalletCard currency="XAF" amt={"XAF " + XAF.toLocaleString()} />
+      </section>
+      <TransactionTab />
+      <CurrentExchangeRates />
+    </div>
+  );
 }
 
-export default App
+export default App;
